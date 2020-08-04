@@ -1,6 +1,12 @@
 @extends('templates.home')
+@section('sub-judul', 'Kategori')
 @section('content')
-<h1>ini adalah kategori</h1>
+@if (session('pesan'))
+    <div class="alert alert-success">
+      {{ session('pesan') }}
+    </div>
+@endif
+<a href="{{ route('category.create') }}" class="btn btn-primary btn-sm mb-3" title="Tambah Kategori">+ Tambah</a>
 <div class="row">
   <div class="col-md-8">
     <table class="table table-sm table-bordered table-hover">
