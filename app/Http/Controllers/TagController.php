@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::paginate(5);
-        return view('admin.category.index', compact('data'));
+        $data = Tag::paginate(5);
+        return view('admin.tag.index', compact('data'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -38,23 +38,24 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3|string',
+            'name' => 'required|min:3'
         ]);
 
-        Category::create([
-            "name" => $request->name,
-            "slug" => Str::slug($request->name)
+        Tag::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
         ]);
-        return redirect()->route('category.index')->with('pesan', 'ditambahkan!');
+
+        return redirect()->route('tag.index')->with('pesan', 'ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Tag $tag)
     {
         //
     }
@@ -62,44 +63,47 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Tag $tag)
     {
-        $data = Category::findOrFail($category->id);
-        return view('admin.category.edit', compact('data'));
+        $data = Tag::findOrFail($tag->id);
+        return view('admin.tag.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
-            'name' => 'required|min:3|string',
+            'name' => 'required|min:3'
         ]);
 
-        $data = Category::findOrFail($category->id);
-        $data->update($request->all());
+        $data = Tag::findOrFail($tag->id);
+        $data->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ]);
 
-        return redirect()->route('category.index')->with('pesan', 'diubah!');
+        return redirect()->route('tag.index')->with('pesan','diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
-        $data = Category::findOrFail($category->id);
+        $data = Tag::findOrFail($tag->id);
         $data->delete();
-        return redirect()->route('category.index')->with('pesan', 'dihapus!');
+        return redirect()->route('tag.index')->with('pesan', 'dihapus!');
     }
 }
