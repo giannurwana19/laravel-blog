@@ -18,7 +18,7 @@
       <tbody>
         @foreach ($data as $key => $item)
         <tr>
-          <td>{{ $key + $data->firstItem()  }}</td>
+          <td>{{ $key + $data->firstItem() }}</td>
           <td>{{ $item->name }}</td>
           <td>
             <form action="{{ route('category.destroy', $item->id) }}" method="POST">
