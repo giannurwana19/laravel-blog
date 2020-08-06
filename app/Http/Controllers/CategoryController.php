@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::paginate(3);
+        $data = Category::paginate(5);
         return view('admin.category.index', compact('data'));
     }
 
@@ -39,7 +39,6 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|string',
-            'slug' => 'required|min:3|string'
         ]);
 
         Category::create([
@@ -68,7 +67,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data = Category::findOrFail($category->id);
+        return view('admin.category.edit', compact('data'));
     }
 
     /**
@@ -80,7 +80,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|string',
+        ]);
+
+        $data = Category::findOrFail($category->id);
+        $data->update($request->all());
+
+        return redirect()->route('category.index')->with('pesan', 'Data berhasil diubah!');
     }
 
     /**
