@@ -21,8 +21,12 @@
           <td>{{ $key + $data->firstItem()  }}</td>
           <td>{{ $item->name }}</td>
           <td>
-            <a href="{{ route('category.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
-            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+            <form action="{{ route('category.destroy', $item->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <a href="{{ route('category.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
+              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus kategori {{ $item->name }}?')">Hapus</button>
+            </form>
           </td>
         </tr>
         @endforeach
