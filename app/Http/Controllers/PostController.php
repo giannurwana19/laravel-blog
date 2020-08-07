@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -52,13 +54,17 @@ class PostController extends Controller
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
-            'gambar' => 'public/uploads/posts' . $new_gambar,
+            'gambar' => $new_gambar,
+            'slug' => Str::slug($request->judul)
         ]);
 
-        $gambar->move('public/uploads/posts', $new_gambar);
+        // cara 1 
+        // $gambar->move('public/uploads/posts/', $new_gambar);
+
+        // cara 2 (lebih efektif)
+        Storage::putFileAs('public/posts', $request->file('gambar'), $new_gambar);
 
         return redirect()->route('post.index')->with('pesan', 'ditambahkan!');
-
     }
 
     /**
@@ -69,7 +75,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        
     }
 
     /**
@@ -103,6 +109,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $data = Post::findOrFail($post->id);
+        $data->delete();
+        return redirect()->route('post.index')->with('pesan', 'dihapus!');
     }
 }
