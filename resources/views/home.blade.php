@@ -1,4 +1,4 @@
 @extends('templates.home')
 @section('content')
-    <h4>ini halaman home</h4>
+    <h4>Selamat Datang Gian!</h4>
 @endsection

@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::resource('/category', 'CategoryController');
 Route::resource('/tag', 'TagController');
