@@ -118,7 +118,6 @@ class PostController extends Controller
             $new_gambar = time() . $gambar->getClientOriginalName();
 
             Storage::putFileAs('public/posts', $request->file('gambar'), $new_gambar);
-            Storage::delete("public/posts/{$post->gambar}");
 
         } else {
             $new_gambar = $post->gambar;
@@ -145,8 +144,32 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $data = Post::findOrFail($post->id);
-        $data->delete();
-        return redirect()->route('post.index')->with('pesan', 'dihapus!');
+        Post::destroy($post->id);
+
+        return redirect()->back()->with('pesan', 'dihapus!');
+    }
+
+    // method buatan untuk menampilkan data yang terhapus
+    public function show_delete()
+    {
+        $post = Post::onlyTrashed()->get();
+        return view('admin.post.softDelete', compact('post'));
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+        Storage::delete("public/posts/{$post->gambar}");
+
+        return redirect()->route('post.show_delete')->with('pesan', 'direstore! Silahkan cek list Post');
+    }
+
+    public function force_delete($id)
+    {
+        $post = Post::withTrashed()->where('id', $id);
+        $post->forceDelete();
+
+        return redirect()->route('post.show_delete')->with('pesan', 'dihapus secara permanen!');
     }
 }

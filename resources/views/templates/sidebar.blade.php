@@ -18,6 +18,9 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('post.index') }}">List Post</a></li>
         </ul>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ route('post.show_delete') }}">History Post</a></li>
+        </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
