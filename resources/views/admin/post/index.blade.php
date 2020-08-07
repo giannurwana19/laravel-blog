@@ -12,10 +12,11 @@
     <table class="table table-sm table-bordered table-hover">
       <thead class="bg-info text-white">
         <th>No</th>
-        <th>Judul</th>
+        <th>Judul Post</th>
         <th>Isi konten</th>
+        <th>Tag</th>
         <th>Kategori</th>
-        <th>Gambar</th>
+        <th>Gambar Thumbnail</th>
         <th>Action</th>
       </thead>
       <tbody>

@@ -90,7 +90,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+        $data = Post::findOrFail($post->id);
+        return view('admin.post.edit', compact('data', 'tags', 'categories'));
     }
 
     /**
@@ -102,7 +105,36 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'judul' => 'required|min:3',
+            'category_id' => 'required',
+            'content' => 'required|min:3',
+        ]);
+
+        $post = Post::findOrFail($post->id);
+
+        if($request->file('gambar')){
+            $gambar = $request->gambar;
+            $new_gambar = time() . $gambar->getClientOriginalName();
+
+            Storage::putFileAs('public/posts', $request->file('gambar'), $new_gambar);
+            Storage::delete("public/posts/{$post->gambar}");
+
+        } else {
+            $new_gambar = $post->gambar;
+        }
+
+        $post->update([
+            'judul' => $request->judul,
+            'category_id' => $request->category_id,
+            'content' => $request->content,
+            'gambar' => $new_gambar,
+            'slug' => Str::slug($request->judul)
+        ]);
+
+        $post->tags()->sync($request->tags);
+
+        return redirect()->route('post.index')->with('pesan', 'Ddiubah');
     }
 
     /**
