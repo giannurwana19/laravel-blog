@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -28,8 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $category = Category::all();
-        return view('admin.post.create', compact('category'));
+        return view('admin.post.create', compact('category', 'tags'));
     }
 
     /**
@@ -50,13 +52,15 @@ class PostController extends Controller
         $gambar = $request->gambar;
         $new_gambar = time() . $gambar->getClientOriginalName();
         
-        Post::create([
+        $post = Post::create([
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
             'gambar' => $new_gambar,
             'slug' => Str::slug($request->judul)
         ]);
+
+        $post->tags()->attach($request->tags);
 
         // cara 1 
         // $gambar->move('public/uploads/posts/', $new_gambar);

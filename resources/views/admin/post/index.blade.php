@@ -24,6 +24,13 @@
           <td>{{ $key + $data->firstItem() }}</td>
           <td>{{ $item->judul }}</td>
           <td>{{ $item->content }}</td>
+          <td>
+            @foreach ($item->tags as $tag)
+            <ul>
+              <li>{{ $tag->name }}</li>
+            </ul>
+            @endforeach
+          </td>
           <td>{{ $item->category->name }}</td>
           <td><img src="{{ asset("/storage/posts/$item->gambar") }}" style="width: 100px" alt=""></td>
           <td>

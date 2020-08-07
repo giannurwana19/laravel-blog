@@ -32,6 +32,20 @@
       </div>
 
       <div class="form-group">
+        <label for="tag">Pilih Tag</label>
+        <select name="tags[]" class="form-control select2" id="tag" multiple="">
+          @foreach ($tags as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+          @endforeach
+        </select>
+        @error('judul')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
+
+      <div class="form-group">
         <label for="content">Konten</label>
         <textarea name="content" class="form-control" id="content"></textarea>
         @error('content')
