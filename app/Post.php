@@ -12,6 +12,8 @@ class Post extends Model
 
     protected $fillable = ['judul', 'content', 'category_id', 'gambar', 'slug', 'user_id'];
 
+    // artinya ini semua melakukan join
+    // SELECT 
     public function category()
     {
         return $this->belongsTo(Category::class);

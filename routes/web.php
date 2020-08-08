@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'BlogController@index');
 
 // kita masukkan route kita ke dalam route group agar user harus login dulu
 Route::group(['middleware' => 'auth'], function () {
