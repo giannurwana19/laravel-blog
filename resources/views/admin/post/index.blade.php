@@ -28,7 +28,7 @@
           <td>{{ $item->content }}</td>
           <td>
             @foreach ($item->tags as $tag)
-              <h6><span class="badge badge-info">{{ $tag->name }}</span></h6>
+            <h6><span class="badge badge-info">{{ $tag->name }}</span></h6>
             @endforeach
           </td>
           <td>{{ $item->category->name }}</td>

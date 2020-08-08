@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/post/force_delete/{id}', 'PostController@force_delete')->name('post.force_delete');
 
     Route::resource('/post', 'PostController');
+
+    Route::resource('/user', 'UserController');
 });
 
 
