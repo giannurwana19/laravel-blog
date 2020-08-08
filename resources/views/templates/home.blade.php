@@ -52,9 +52,16 @@
                 <i class="far fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
+              <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
               </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+
             </div>
           </li>
         </ul>
