@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -36,7 +36,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email',
+            'type_user' => 'required',
+        ]);
+
+        if ($request->password) {
+            $password = bcrypt($request->password);
+        } else {
+            $password = bcrypt(123);
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'type_user' => $request->type_user,
+            'password' => $password
+        ]);
+
+        return redirect()->route('user.index')->with('pesan', 'disimpan!');
     }
 
     /**
@@ -58,7 +77,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -70,7 +90,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+            'type_user' => 'required',
+        ]);
+        
+        $user = User::findOrFail($id);
+
+        if ($request->password) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'type_user' => $request->type_user,
+                'password' => bcrypt($request->password)
+            ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'type_user' => $request->type_user,
+            ]);
+        }
+
+        return redirect()->route('user.index')->with('pesan', 'diubah');
     }
 
     /**
@@ -81,6 +123,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+
+        return redirect()->back()->with('pesan', 'dihapus!');
     }
 }

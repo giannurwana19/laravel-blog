@@ -6,7 +6,7 @@
   Data berhasil <b>{{ session('pesan') }}</b>
 </div>
 @endif
-<a href="{{ route('category.create') }}" class="btn btn-primary btn-sm mb-3" title="Tambah Kategori">+ Tambah</a>
+<a href="{{ route('user.create') }}" class="btn btn-primary btn-sm mb-3" title="Tambah Kategori">+ Tambah</a>
 <div class="row">
   <div class="col-md-8">
     <table class="table table-sm table-bordered table-hover">
@@ -34,7 +34,7 @@
               @method('DELETE')
               <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success btn-sm">Edit</a>
               <button type="submit" class="btn btn-danger btn-sm"
-                onclick="return confirm('Yakin hapus kategori {{ $user->name }}?')">Hapus</button>
+                onclick="return confirm('Yakin hapus User {{ $user->name }}?')">Hapus</button>
             </form>
           </td>
         </tr>
