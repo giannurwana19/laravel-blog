@@ -16,7 +16,8 @@
         <th>Isi konten</th>
         <th>Tag</th>
         <th>Kategori</th>
-        <th>Gambar Thumbnail</th>
+        <th>Thumbnail</th>
+        <th>Creator</th>
         <th>Action</th>
       </thead>
       <tbody>
@@ -27,13 +28,12 @@
           <td>{{ $item->content }}</td>
           <td>
             @foreach ($item->tags as $tag)
-            <ul>
-              <li>{{ $tag->name }}</li>
-            </ul>
+              <h6><span class="badge badge-info">{{ $tag->name }}</span></h6>
             @endforeach
           </td>
           <td>{{ $item->category->name }}</td>
-          <td><img src="{{ asset("/storage/posts/$item->gambar") }}" style="width: 100px" alt=""></td>
+          <td><img src="{{ asset("/storage/posts/$item->gambar") }}" style="width: 50px" alt=""></td>
+          <td>{{ $item->user->name }}</td>
           <td>
             <form action="{{ route('post.destroy', $item->id) }}" method="POST">
               @csrf
