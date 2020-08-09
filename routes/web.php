@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'BlogController@index');
+// Route::get('/isi_post', function(){
+//     return view('template_blog.isi_post');
+// });
+
+Route::get('/isi_post/{slug}', 'BlogController@isi_post')->name('blog.isi');
 
 // kita masukkan route kita ke dalam route group agar user harus login dulu
 Route::group(['middleware' => 'auth'], function () {

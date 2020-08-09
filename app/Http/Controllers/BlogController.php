@@ -22,6 +22,13 @@ class BlogController extends Controller
         return view('blog', compact('blogs', 'tags', 'categories'));
     }
 
+    public function isi_post($slug)
+    {
+        $data = Post::where('slug', $slug)->get();
+        $categories = Category::all();
+        return view('template_blog.isi_post', compact('data', 'categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,7 +58,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
