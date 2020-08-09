@@ -23,8 +23,9 @@ Route::get('/isi-post/{slug}', 'BlogController@isi_post')->name('blog.isi');
 
 Route::get('/list-post', 'BlogController@listBlog')->name('blog.list');
 
-// yang kita kirim ke getRouteKeyName adalah modelnya, walaupun yang kita tangkap adalah slug
-Route::get('/list-category/{category}', 'BlogController@listCategory')->name('blog.category');
+// yang kita kirim ke getRouteKeyName adalah modelnya, walaupun yang kita tangkap adalah slug (laravel 6)
+// menambahkan :slug dan menghilangkan method getRouteKeyNAme
+Route::get('/list-category/{category:slug}', 'BlogController@listCategory')->name('blog.category');
 
 Route::get('/search', 'BlogController@search')->name('blog.search');
 

@@ -14,9 +14,9 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
-    // mengganti route key dari id menjadi slug
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // // mengganti route key dari id menjadi slug
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 }
