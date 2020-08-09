@@ -22,6 +22,9 @@ Route::get('/isi-post/{slug}', 'BlogController@isi_post')->name('blog.isi');
 
 Route::get('/list-post', 'BlogController@listBlog')->name('blog.list');
 
+// yang kita kirim ke getRouteKeyName adalah modelnya, walaupun yang kita tangkap adalah slug
+Route::get('/list-category/{category}', 'BlogController@listCategory')->name('blog.category');
+
 // kita masukkan route kita ke dalam route group agar user harus login dulu
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
