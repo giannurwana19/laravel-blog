@@ -35,7 +35,7 @@
         <label for="tag">Pilih Tag</label>
         <select name="tags[]" class="form-control select2" id="tag" multiple="">
           @foreach ($tags as $item)
-              <option value="{{ $item->id }}">{{ $item->name }}</option>
+          <option value="{{ $item->id }}">{{ $item->name }}</option>
           @endforeach
         </select>
         @error('judul')
@@ -70,4 +70,12 @@
     </form>
   </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+<script>
+  CKEDITOR.replace( 'content' );
+</script>
+
 @endsection
+

@@ -2,6 +2,6 @@
 @section('content')
     @foreach ($data as $item)
     <h1>{{ $item->judul }}</h1>
-    <p>{{ $item->content }}</p>
+    <p>{!! $item->content !!}</p>
     @endforeach
 @endsection

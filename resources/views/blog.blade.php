@@ -82,7 +82,7 @@
           @foreach ($blogs as $blog)
           <div class="col-md-6">
             <div class="post">
-              <a class="post-img" href="{{ route('blog.isi', $blog->slug) }}" target="_blank"><img src="{{ asset("storage/posts/$blog->gambar") }}"
+              <a class="post-img" href="{{ route('blog.isi', $blog->slug) }}"><img src="{{ asset("storage/posts/$blog->gambar") }}"
                   alt=""></a>
               <div class="post-body">
                 <div class="post-category">
