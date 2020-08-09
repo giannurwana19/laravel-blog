@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index(Post $post)
     {
-        $blogs = $post->orderBy('created_at', 'desc')->get();
+        $blogs = $post->latest()->take(4)->get();
         $tags = Tag::all();
         $categories = Category::all();
         return view('blog', compact('blogs', 'tags', 'categories'));
@@ -29,69 +29,11 @@ class BlogController extends Controller
         return view('template_blog.isi_post', compact('data', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function listBlog()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $tags = Tag::all();
+        $categories = Category::all();
+        $posts = Post::latest()->paginate(4);
+        return view('template_blog.list_post', compact('categories', 'posts', 'tags'));
     }
 }

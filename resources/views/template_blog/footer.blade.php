@@ -24,9 +24,9 @@
           <h3 class="footer-title">Categories</h3>
           <div class="category-widget">
             <ul>
-              {{-- @foreach ($categories as $category) --}}
-              <li><a href="#">kategori <span>451</span></a></li>
-              {{-- @endforeach --}}
+              @foreach ($categories as $category)
+              <li><a href="#">{{ $category->name }} <span>{{ $category->posts->count() }}</span></a></li>
+              @endforeach
             </ul>
           </div>
         </div>
@@ -36,9 +36,9 @@
           <h3 class="footer-title">Tags</h3>
           <div class="tags-widget">
             <ul>
-              {{-- @foreach ($tags as $tag) --}}
-              <li><a href="#">tag</a></li>
-              {{-- @endforeach --}}
+              @foreach ($tags as $tag)
+              <li><a href="#">{{ $tag->name }}</a></li>
+              @endforeach
             </ul>
           </div>
         </div>
