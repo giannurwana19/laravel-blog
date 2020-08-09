@@ -45,4 +45,12 @@ class BlogController extends Controller
         $data = $category->posts()->paginate(2);
         return view('template_blog.list_category', compact('data', 'categories', 'tags'));
     }
+
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        $posts = Post::where('judul', $request->search)->orWhere('judul', 'like', '%'. $request->search .'%')->paginate(4);
+        return view('template_blog.list_post', compact('posts', 'categories', 'tags'));
+    }
 }

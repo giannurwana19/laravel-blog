@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Route::get('/list-post', 'BlogController@listBlog')->name('blog.list');
 
 // yang kita kirim ke getRouteKeyName adalah modelnya, walaupun yang kita tangkap adalah slug
 Route::get('/list-category/{category}', 'BlogController@listCategory')->name('blog.category');
+
+Route::get('/search', 'BlogController@search')->name('blog.search');
 
 // kita masukkan route kita ke dalam route group agar user harus login dulu
 Route::group(['middleware' => 'auth'], function () {

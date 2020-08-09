@@ -14,8 +14,7 @@
         <li><a href="author.html">{{ $post->user->name }}</a></li>
         <li>{{ $post->created_at }}</li>
       </ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam...</p>
+      <p>{!! $post->content !!}</p>
     </div>
   </div>
   @endforeach

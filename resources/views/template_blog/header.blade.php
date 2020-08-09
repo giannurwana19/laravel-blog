@@ -5,6 +5,22 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{-- meta untuk google, max 100 - 140 --}}
+  <meta name="description" content="">
+  <meta name="author" content="Gian Nurwana">
+
+  {{-- meta untuk facebook --}}
+  {{-- ketika kita share sesuatu dari fb, maka fb akan mengambil data dari meta ini --}}
+  <meta property="og:title" content="European Travel Destinations">
+  <meta property="og:description" content="Offering tour packages for individuals or groups.">
+  <meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg">
+  <meta property="og:url" content="http://euro-travel-example.com/index.htm">
+
+  {{-- meta untuk twitter --}}
+  <meta name="twitter:title" content="European Travel Destinations ">
+  <meta name="twitter:description" content=" Offering tour packages for individuals or groups.">
+  <meta name="twitter:image" content=" http://euro-travel-example.com/thumbnail.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <title>Callie HTML Template</title>
@@ -58,7 +74,7 @@
             <button class="aside-btn"><i class="fa fa-bars"></i></button>
             <button class="search-btn"><i class="fa fa-search"></i></button>
             <div id="nav-search">
-              <form>
+              <form action="{{ route('blog.search') }}" method="GET">
                 <input class="input" name="search" placeholder="Enter your search...">
               </form>
               <button class="nav-close search-close">
@@ -90,8 +106,6 @@
                 </div>
               </div>
             </li>
-            <li><a href="#">Health</a></li>
-            <li><a href="#">Travel</a></li>
           </ul>
           <!-- /nav -->
         </div>
